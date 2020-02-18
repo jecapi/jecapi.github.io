@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="/inc/js/constants.js"></script>
+    <script src="/inc/js/fce.js"></script>
+    <script src="/inc/js/jq.js"></script>
+    <script src="/inc/js/jq.cookie.js"></script>
+    <script src="/inc/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/inc/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/inc/css/style.css">
+    <link rel="stylesheet" href="/inc/css/candidates.css">
+    <title>Voting</title>
+</head>
+<body>
+<div class="hidden" id="voting">
+    <div class="candidate candidate1"><h2 class="text-center">Foo</h2></div>
+    <div class="candidate candidate2"><h2 class="text-center">Joe</h2></div>
+    <div class="candidate candidate3"><h2 class="text-center">Doe</h2></div>
+    <div class="candidate candidate4"><h2 class="text-center">Bar</h2></div>
+    <div class="candidate candidate5"><h2 class="text-center">Don</h2></div>
+    <div class="col-md-12 alert-primary fixed-bottom text-center" id="voting-manual"></div>
+</div>
+<div id="login">
+    <div class="col-md-4 offset-4 alert-info fixed-bottom text-center hidden" id="infobox"></div>
+    <input id="cardID" style="position: absolute; top: -30px">
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#voting-manual").html(TEXT_HOW_TO_VOTE);
+        //generating data-candidate
+        $(".candidate").each(function () {
+            $(this).data("candidate", $("h2", this).text());
+        });
+
+        //voting
+        $(".candidate").on("click", function () {
+            var name = $(this).data("candidate");
+            addVote($("#cardID").val(), name);
+            $("#login").removeClass("hidden");
+            $("#voting").addClass("hidden");
+        });
+        $("#cardID").focus();
+    });
+
+    //picking cardID
+    $(document).keypress(function (event) {
+        $("#cardID").focus();
+        let key = event.which;
+        if (key === 13) {
+            let cardID = $("#cardID").val();
+            try {
+                if (canVote(cardID)) {
+                    $("#voting").removeClass("hidden");
+                    $("#login").addClass("hidden");
+                }
+            } catch (e) {
+                showInfobox(ALERT_WARN, e);
+                $("#cardID").val("");
+            }
+        }
+    });
+</script>
+</body>
+</html>

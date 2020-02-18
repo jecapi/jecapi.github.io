@@ -1,0 +1,46 @@
+/**********************************************************************************************************************/
+.candidate1 {
+    background-image: url('/img/candidate1.jpg');
+}
+
+.candidate1 > h2 {
+    background-color: #6a1b9a;
+}
+
+/**********************************************************************************************************************/
+.candidate2 {
+    background-image: url('/img/candidate2.jpg');
+}
+
+.candidate2 > h2 {
+    background-color: #2e7d32;
+}
+
+/**********************************************************************************************************************/
+.candidate3 {
+    background-image: url('/img/candidate3.jpg');
+}
+
+.candidate3 > h2 {
+    background-color: #c62828;
+}
+
+/**********************************************************************************************************************/
+.candidate4 {
+    background-image: url('/img/candidate4.jpg');
+}
+
+.candidate4 > h2 {
+    background-color: #ffa500;
+}
+
+/**********************************************************************************************************************/
+.candidate5 {
+    background-image: url('/img/candidate5.jpg');
+}
+
+.candidate5 > h2 {
+    background-color: #212121;
+    color: #e0e0e0;
+}
+
