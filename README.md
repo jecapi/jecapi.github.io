@@ -1,53 +1,69 @@
-This is the site for counting votes of audience in your election. 
-This document will say you requirements and how to use it.
+# information-lookup
 
+Web app template that is used to determine if the location specified intersects a polygon.  The location entered is optionally stored in a layer in the web map.
 
-Security disclaimer
-===================
+![App](information-lookup.png)
 
-The guest should not have access to the keyboard or any way how to manipulate the computer, he could for example delete 
-your cookies and you will loose all your voting data!
+## Features
+* Place Finding - Find places or geocode an address
+* Graphics - Draw a point
+* Query - Determine if drawn graphic is within a specific area
+* Webmap- Use the template with ArcGIS Online webmaps 
 
-About project
-=============
+## Instructions
 
-The project was quickly developed for one of the events that i was helping with. I used cookies even that are not so 
-secure, because i need to work it offline on any computer without any installation (for example web server). It was for 
-me the best choose for that time.
+1. Fork and then clone the repo. 
+2. Update the configuration settings to use template
+2. Run and try the samples.
 
-Requirements
-============
+## Requirements
 
-- a modern web browser (Chrome is recommended. Please, don't use Internet Explorer or similar shit)
-- enabled JavaScript and Cookies
-- a NFC card reader or another way to simulate keyboard input
+* Notepad or your favorite HTML editor
+* Web browser with access to the Internet
 
-How to use it
-=============
+## Deploying
 
-First, you need to create list of candidates in your site. First edit the index.html file. Here you can find list of 
-candidates, here in this example 5 of them (line 19-23). Put names of them here. After that, edit the 
-`/inc/css/candidates.css` file. Here you can add photos and header colors of candidates. If you have a different number 
-of candidates than 5, edit a `/inc/css/style.css` file, on line 15 you have `width: 20%;`. the number is calculated as 
-100/*number of candidates* (100/5 = 20).
+1. To deploy this application, download the template from Portal/ArcGIS Online and unzip it.
+2. Copy the unzipped folder containing the web app template files, such as index.html, to your web server. You can rename the folder to change the URL through which users will access the application. By default the URL to the app will be `http://<Your Web Server>/<app folder name>/index.html`
+3. Change the sharing host, found in defaults.js inside the config folder for the application, to the sharing URL for ArcGIS Online or Portal. For ArcGIS Online users, keep the default value of www.arcgis.com or specify the name of your organization.
+  - ArcGIS Online Example:  `"sharinghost": location.protocol + "//" + “<your organization name>.maps.arcgis.com`
+  - Portal Example where `arcgis` is the name of the Web Adaptor: `"sharinghost": location.protocol + "//" + "webadaptor.domain.com/arcgis"`
+4. If you are using Portal or a local install of the ArcGIS API for JavaScript, change all references to the ArcGIS API for JavaScript in index.html to refer to your local copy of the API. Search for the references containing `"//js.arcgis.com/3.15"` and replace this portion of the reference with the url to your local install.
+  - For example: `"//webadaptor.domain.com/arcgis/jsapi/jsapi"` where `arcgis` is the name of your Web Adaptor.
+5. Copy a map or group ID from Portal/ArcGIS Online and replace the default web map ID in the application’s index.html page. You can now run the application on your web server or customize the application further.
 
-If you have more than 5 candidates, we recommend you a different layout, because the "strips" for candidates would be 
-really thin.
+> **Note:** If your application edits features in a feature service, contains secure services or web maps that aren't shared publicly, or generate requests that exceed 200 characters, you may need to set up and use a proxy page. Common situations where you may exceed the URL length are using complex polygons as input to a task or specifying a spatial reference using well-known text (WKT). For details on installing and configuring a proxy page see [Using the proxy](https://developers.arcgis.com/javascript/jshelp/ags_proxy.html). If you do not have an Internet connection, you will need to access and deploy the ArcGIS API for JavaScript documentation from [developers.arcgis.com](https://developers.arcgis.com/).
 
-Then you need to setup your card reader or another kind of user input, that it will type a unique code of every card 
-(guest), ending with pressing enter (javascript key code 13). After that, you can visit the cards.html file (open it in 
-web browser), where you can create whitelist of cards (that make prevents that you can vote only with approved cards, 
-not any random card that visitor can have).
+## Resources
 
-You can edit texts of the site in the `/inc/js/constants.js`
+* [ArcGIS for JavaScript API Resource Center](http://help.arcgis.com/en/webapi/javascript/arcgis/index.html)
+* [ArcGIS Blog](http://blogs.esri.com/esri/arcgis/)
+* [twitter@esri](http://twitter.com/esri)
 
-Finally, open index.html in web browser and the voting can start! (of course test if before event)
+## Issues
 
-The final results are on `results.html` file (open it in web browser)
+Find a bug or want to request a new feature?  Please let us know by submitting an issue.
 
-I hope this site will help with your events.
+## Contributing
 
+Esri welcomes contributions from anyone and everyone. Please see our [guidelines for contributing](https://github.com/esri/contributing).
 
-----
+## Licensing
+Copyright 2013 Esri
 
-Found a mistake/typing error? Pull requests are appreciated.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+A copy of the license is available in the repository's [license.txt](https://github.com/esri/information-lookup/blob/master/License.txt) file.
+
+[](Esri Tags: ArcGIS Web Mapping Service information Public Utilities Water-Utility Utilities Water Gas Electric)
+[](Esri Language: JavaScript)​
