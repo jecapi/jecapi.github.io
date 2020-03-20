@@ -1,133 +1,115 @@
-﻿<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Information Lookup</title>
-    <meta charset="utf-8">
-    <!-- Responsive -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <!-- End Responsive -->
-    <!-- Use protocol relative urls that way if the browser is viewing the page via HTTPS the js/css file will be requested using the HTTPS protocol -->
-    <link rel="stylesheet" href="https://jsdev.arcgis.com/3.27/dijit/themes/claro/claro.css">
-    <link rel="stylesheet" href="https://jsdev.arcgis.com/3.27/esri/css/esri.css">
-    <!-- Load any application specific styles -->
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/basemapButton.css">
-    <link rel="stylesheet" href="css/search.css">
-    <link rel="stylesheet" href="css/navigationButtons.css">
-    <link rel="stylesheet" href="css/combinedPopup.css">
-    <link rel="stylesheet" type="text/css" href="css/drawer.css">
-    <link rel="stylesheet" type="text/css" href="css/splash.css">
-    <!--[if gte IE 9]>
-      <style type="text/css">
-        .gradient {
-           filter: none;
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/bootstrap.min.css"> 
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"> 
+    <style>
+        .noselect {
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none; /* Safari */
+            -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Old versions of Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
         }
-      </style>
-    <![endif]-->
+
+        .lineThrough {
+            text-decoration: line-through;
+        }
+    </style>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js');
+        }
+    </script>
+    <title>Todos</title>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#F8F8FF">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-2048-2732.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-2732-2048.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-1668-2388.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-2388-1668.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-1668-2224.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-2224-1668.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-1536-2048.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-2048-1536.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-1242-2688.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-2688-1242.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-1125-2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-2436-1125.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-828-1792.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-1792-828.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-1242-2208.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-2208-1242.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-750-1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-1334-750.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-640-1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-1136-640.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+
+    <link rel="icon" type="image/png" sizes="196x196" href="img/favicon-196.png">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-icon-180.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="img/apple-icon-167.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="img/apple-icon-152.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="img/apple-icon-120.png">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <link rel="apple-touch-startup-image" href="img/apple-splash-dark-2048-2732.png" media="(prefers-color-scheme: dark) and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-dark-2732-2048.png" media="(prefers-color-scheme: dark) and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-dark-1668-2388.png" media="(prefers-color-scheme: dark) and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-dark-2388-1668.png" media="(prefers-color-scheme: dark) and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-dark-1668-2224.png" media="(prefers-color-scheme: dark) and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-dark-2224-1668.png" media="(prefers-color-scheme: dark) and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-dark-1536-2048.png" media="(prefers-color-scheme: dark) and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-dark-2048-1536.png" media="(prefers-color-scheme: dark) and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-dark-1242-2688.png" media="(prefers-color-scheme: dark) and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-dark-2688-1242.png" media="(prefers-color-scheme: dark) and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-dark-1125-2436.png" media="(prefers-color-scheme: dark) and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-dark-2436-1125.png" media="(prefers-color-scheme: dark) and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-dark-828-1792.png" media="(prefers-color-scheme: dark) and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-dark-1792-828.png" media="(prefers-color-scheme: dark) and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-dark-1242-2208.png" media="(prefers-color-scheme: dark) and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-dark-2208-1242.png" media="(prefers-color-scheme: dark) and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-dark-750-1334.png" media="(prefers-color-scheme: dark) and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-dark-1334-750.png" media="(prefers-color-scheme: dark) and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-dark-640-1136.png" media="(prefers-color-scheme: dark) and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="img/apple-splash-dark-1136-640.png" media="(prefers-color-scheme: dark) and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
 
 </head>
-<body class="claro app-loading">
-    <div id="splash"></div>
-    <div class="loading-indicator">
-        <div class="loading-message" id="loading_message"></div>
-    </div>
-    <div id="border_container" class="border-container-outer">
-        <div id="cp_top" class="content-pane-inner-top theme">
-            <div id="top_bar" class="top-bar theme">
-                <div id="toggle_button" class="icon-menu hamburger-button"></div>
-                <div id="icontextblock" class="app-title">
-                    <div id="page_icon" class="page-icon"><div id="page_icon_image" class="page-icon-image"></div></div>
-                    <div id="title_text" class="title-text"></div>
+<body>
+    
+    <div class="container">
+        <div id="app">
 
-                </div>
-            </div>
-
-        </div>
-        <div id="cp_left" class="content-pane-left">
-            <div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="gutters:false" id="border_container_left">
-                <div id="leftPane" class="content-pane-display theme" data-dojo-type="dijit/layout/ContentPane"
-                     data-dojo-props="region:'center'">
-
-                </div>
-                <div id="bottomPane" class="content-pane-btn theme" data-dojo-type="dijit/layout/ContentPane"
-                     data-dojo-props="region:'bottom'">
-                    <div id="sidebar_button_pane" class="sidebar-button-pane theme">
-                        <div id='linkImage' class='icon-link side-bar-icon'></div>
-                        <div id='emailImage' class='icon-mail-alt side-bar-icon'></div>
+            <br><br><br>
+            <div class="col-md-6 offset-md-3">
+                <form v-on:submit.prevent="addTodo">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Todo" v-model="todoText" ref="input">
+                        <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">Add</button>
+                        </div>
                     </div>
-                </div>
+                </form>
+
+                <ul class="list-group">
+                    <li class="list-group-item noselect" v-for="(todo, index) in todos">
+                        <!--
+                        <i v-show="todo.done" class="fa fa-check-square-o" aria-hidden="true" style="margin-right: 25px;" v-on:click="checkTodo(index)"></i>
+                        <i v-show="!todo.done" class="fa fa-square-o" aria-hidden="true" style="margin-right: 25px;" v-on:click="checkTodo(index)"></i>
+                        -->
+                        <input type="checkbox" v-model="todo.done" style="margin-right: 25px;" v-on:click="checkTodo(index)">
+                        <span v-bind:class="[todo.done ?  'lineThrough' : '']">{{todo.text}}</span> 
+                        <span class="pull-right" v-on:click="removeTodo(index)"><b>x</b></span>
+                    </li>
+                </ul>
             </div>
-        </div>
-        <div id="cp_center" class="content-pane-center">
-
-            <div id="mapDiv" dir="ltr">
-
-                <div id="searchDiv"></div>
-                <div id="mapButtons" class="map-buttons"></div>
-                <div id="basemapDiv"></div>
-            </div>
-
         </div>
     </div>
 
-    <script type="text/javascript">
-        var package_path = location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
-        var webgl = location.search.match(/webgl=([\w-]+)/) ? (RegExp.$1).toLowerCase() === "false" ? 0 : 1 : 1;
-        var dojoConfig = {
-            async: true,
-            has: {
-                "esri-featurelayer-webgl": webgl
-            },
-            // The locationPath logic below may look confusing but all its doing is
-            // enabling us to load the api from a CDN and load local modules from the correct location.
-            packages: [{
-                name: "application",
-                location: package_path + '/js'
-            }, {
-                name: "config",
-                location: package_path + '/config'
-            }, {
-                name: "arcgis_templates",
-                location: package_path + '/..'
-            }]
-        };
-        var urlLocale = location.search.match(/locale=([\w\-]+)/) ? RegExp.$1 : null;      
-        if (urlLocale) {
-            dojoConfig.locale = urlLocale;
-        }
+    <script src="js/vue.min.js"></script>
+    <script src="js/main.js"></script>
 
-        
-    </script>
-    <script type="text/javascript" src="https://jsdev.arcgis.com/3.27/"></script>
-    <script type="text/javascript">
-        require([
-              "config/templateConfig",
-              "application/template",
-              "application/main"
-        ], function (
-        templateConfig,
-        Template,
-        Main
-          ) {
-            // create the template. This will take care of all the logic required for template applications
-            var myTemplate = new Template(templateConfig);
-            // create my main application. Start placing your logic in the main.js file.
-            var myApp = new Main();
-            // start template
-            myTemplate.startup().then(function (config) {
-                // The config object contains the following properties: helper services, (optionally)
-                // i18n, appid, webmap and any custom values defined by the application.
-                // In this example we have one called theme.
-                myApp.startup(config);
-            }, function (error) {
-                // something went wrong. Let's report it.
-                myApp.reportError(error);
-            });
-        });
-    </script>
-</body>
-</html>
+</body></html>
